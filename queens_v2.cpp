@@ -54,38 +54,38 @@ struct init_next_row;
 
 template<int N, typename Y, int ...XS>
 struct init_next_row<N, false,Y, XS...>{
-	static const int value = 0;
+    static const int value = 0;
 };
 
 
 template<int N, typename Y, int ...XS>
 struct init_next_row<N, true,Y, XS...>{
-	static const int value = start_row<N, !Y::is_end, Y, XS...>::value;
+    static const int value = start_row<N, !Y::is_end, Y, XS...>::value;
 };
 
 
 template<int N, typename X, typename Y, int ...XS>
 struct pass_row<N, false, X, Y, XS...>{
-	static const int value = 0;
+    static const int value = 0;
 };
 
 
 template<int N, typename X, typename Y, int ...XS>
 struct pass_row<N, true, X, Y, XS...>{
-	static const int value = 
-		init_next_row<N, check_attack<X::pos, Y::pos, XS...>::value, typename Y::next, XS..., X::pos>::value + 
-		pass_row<N, !X::next::is_end, typename X::next, Y, XS...>::value;
+    static const int value = 
+        init_next_row<N, check_attack<X::pos, Y::pos, XS...>::value, typename Y::next, XS..., X::pos>::value + 
+        pass_row<N, !X::next::is_end, typename X::next, Y, XS...>::value;
 };
 
 
 template<int N>
 struct do_calculations{
-	static const int value = start_row<N, true, range<N>>::value;
+    static const int value = start_row<N, true, range<N>>::value;
 };
 
 
 int main(){
-	const int N = 8;
-	
-	std::cout << do_calculations<N>::value << std::endl;
+    const int N = 8;
+    
+    std::cout << do_calculations<N>::value << std::endl;
 }
