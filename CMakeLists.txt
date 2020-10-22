@@ -7,7 +7,7 @@ add_executable(queens queens_v2.cpp)
 add_executable(test test.cpp)
 
 
-set_target_properties(queens test_ PROPERTIES
+set_target_properties(queens test PROPERTIES
     CXX_STANDARD 11
     CXX_STANDARD_REQUIRED ON
 )
